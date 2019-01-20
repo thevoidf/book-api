@@ -2,22 +2,11 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-	username: {
-		type: String,
-		require: true
-	},
-	email: {
-		type: String,
-		require: true
-	},
-	password: {
-		type: String,
-		require: true
-	},
-	isAdmin: {
-		type: Boolean,
-		default: false
-	}
+	_id: mongoose.Schema.Types.ObjectId,
+	username: { type: String, require: true },
+	email: { type: String, require: true },
+	password: { type: String, require: true },
+	isAdmin: { type: Boolean, default: false }
 });
 
 userSchema.pre('save', function(next) {
