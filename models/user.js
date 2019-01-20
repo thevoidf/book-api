@@ -3,9 +3,9 @@ const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
 	_id: mongoose.Schema.Types.ObjectId,
-	username: { type: String, require: true },
-	email: { type: String, require: true },
-	password: { type: String, require: true },
+	username: { type: String, required: true },
+	email: { type: String, required: true },
+	password: { type: String, required: true },
 	isAdmin: { type: Boolean, default: false }
 });
 
