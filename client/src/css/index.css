@@ -1,0 +1,83 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, sans-serif;
+	background: #282a36;
+	color: #f8f8f2;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+	margin: 0;
+}
+
+a {
+	color: #f8f8f2;
+	text-decoration: none;
+}
+
+.wrapper {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.simple-form {
+	width: 400px;
+	margin: 20px auto;
+}
+
+.simple-form .error {
+	color: #ff5555;
+}
+
+.simple-form .form-group {
+	display: block;
+}
+
+.simple-form .form-input {
+	display: block;
+	width: 100%;
+	padding: 6px;
+	margin: 10px 0;
+	font-size: 15px;
+	background: #282a36;
+	color: #f8f8f2;
+	border: 1px solid #363849;
+}
+.simple-form .checkbox {
+	margin: 10px 0;
+}
+.simple-form .checkbox label {
+	padding: 0 0 0 5px;
+}
+
+.button {
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	font-size: 15px;
+	background: #6272a4;
+	color: #f8f8f2;
+	cursor: pointer;
+	user-select: none;
+	text-align: center;
+}
+
+.cf:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.hide {
+	display: none;
+}
