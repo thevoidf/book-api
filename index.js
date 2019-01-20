@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -10,7 +12,8 @@ const users = require('./routes/users');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost:27017/book-api', { useNewUrlParser: true });
+console.log(process.env.DB_URL)
+mongoose.connect(process.env.DB_URL, { useNewUrlParser: true });
 
 app.use('/books', books);
 app.use('/users', users);

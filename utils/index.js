@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 module.exports = {
 	signToken: user => {
 		return new Promise((resolve, reject) => {
-			jwt.sign(user, 'secret', (error, token) => {
+			jwt.sign(user, process.env.JWT_SECRET, (error, token) => {
 				if (error) return reject(error);
 				resolve(token);
 			});
@@ -11,7 +11,7 @@ module.exports = {
 	},
 	verifyToken: token => {
 		return new Promise((resolve, reject) => {
-			jwt.verify(token, 'secret', (error, decoded) => {
+			jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
 				if (error) return reject(error);
 				resolve(decoded);
 			});
@@ -26,7 +26,7 @@ module.exports = {
 		if (!token)
 			return next(new Error('Can\'t parse token'));
 
-		module.exports.verifyToken(token, 'secret')
+		module.exports.verifyToken(token, process.env.JWT_SECRET)
 			.then(decoded => next())
 			.catch(error => next(error));
 	}
