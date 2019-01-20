@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const User = require('../models/user');
 const { signToken } = require('../utils');
 
 router.post('/', (req, res) => {
 	const user = new User({
+		_id: mongoose.Types.ObjectId(),
 		username: req.body.username,
 		email: req.body.email,
 		password: req.body.password,
@@ -14,7 +16,8 @@ router.post('/', (req, res) => {
 	user.save().then(result => {
 		return signToken({
 			username: user.username,
-			email: user.email
+			email: user.email,
+			isAdmin: user.isAdmin
 		});
 	}).then(token => {
 		res.status(201).json({
@@ -47,7 +50,8 @@ router.post('/login', (req, res) => {
 				return Promise.reject({ message: 'Incorrect password' });
 			return signToken({
 				username: user.username,
-				email
+				email,
+				isAdmin: user.isAdmin
 			});
 		}).then(token => {
 			res.status(200).json({

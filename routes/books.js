@@ -1,11 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const Book = require('../models/book');
+const { hasToken } = require('../utils');
 
-router.post('/', (req, res) => {
+router.post('/', hasToken, (req, res) => {
 	const book = new Book({
+		_id: mongoose.Types.ObjectId(),
 		title: req.body.title,
-		description: req.body.description
+		description: req.body.description,
+		user: req.body.user
 	});
 
 	book.save().then(result => {
@@ -50,11 +54,12 @@ router.get('/:id', (req, res) => {
 		});
 });
 
-router.post('/:id/update', (req, res) => {
+router.post('/:id/update', hasToken, (req, res) => {
 	const { id } = req.params;
 	const newBook = {
 		title: req.body.title,
-		description: req.body.description
+		description: req.body.description,
+		user: req.body.user
 	}
 
 	Book.update({ _id: id }, {
@@ -64,7 +69,7 @@ router.post('/:id/update', (req, res) => {
 	}).catch(error => {
 		console.log(error);
 		res.status(500).json({
-			error: error.message || 'failed to update book'
+			error: error.message || 'Failed to update book'
 		});
 	});
 });
@@ -75,11 +80,10 @@ router.delete('/:id', (req, res) => {
 		.remove({ _id: id })
 		.then(result => {
 			res.status(200).json(result);
-		})
-		.catch(error => {
+		}).catch(error => {
 			console.log(error);
 			res.json({
-				error: error.message || 'failed to get all books'
+				error: error.message || 'Failed to remove book'
 			});
 		});
 });
