@@ -54,12 +54,30 @@ router.get('/:id', (req, res) => {
 		});
 });
 
+router.get('/:userId/user', (req, res) => {
+	const { userId } = req.params;
+
+	Book
+		.find({ user: userId })
+		.then(result => {
+			if (!result)
+				return res.status(404).json({
+					error: `book not found by id: ${id}`
+				});
+			res.status(200).json(result);
+		}).catch(error => {
+			console.log(error);
+			res.status(500).json({
+				error: error.message || `failed to get object by id: ${id}`
+			});
+		});
+});
+
 router.post('/:id/update', hasToken, (req, res) => {
 	const { id } = req.params;
 	const newBook = {
 		title: req.body.title,
 		description: req.body.description,
-		user: req.body.user
 	}
 
 	Book.update({ _id: id }, {
@@ -74,7 +92,7 @@ router.post('/:id/update', hasToken, (req, res) => {
 	});
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', hasToken, (req, res) => {
 	const { id } = req.params;
 	Book
 		.remove({ _id: id })

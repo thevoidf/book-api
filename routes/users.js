@@ -15,6 +15,7 @@ router.post('/', (req, res) => {
 
 	user.save().then(result => {
 		return signToken({
+			id: user._id,
 			username: user.username,
 			email: user.email,
 			isAdmin: user.isAdmin
@@ -49,6 +50,7 @@ router.post('/login', (req, res) => {
 			if (!isCorrect)
 				return Promise.reject({ message: 'Incorrect password' });
 			return signToken({
+				id: user._id,
 				username: user.username,
 				email,
 				isAdmin: user.isAdmin
