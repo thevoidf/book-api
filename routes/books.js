@@ -17,7 +17,7 @@ router.post('/', hasToken, (req, res) => {
 	}).catch(error => {
 		console.log(error);
 		res.status(500).json({
-			error: error.message || 'failed to create book'
+			error: error.message || 'Failed to create book'
 		});
 	});
 });
@@ -29,8 +29,8 @@ router.get('/', (req, res) => {
 			res.status(200).json(result);
 		}).catch(error => {
 			console.log(error);
-			res.json({
-				error: error.message || 'failed to get all books'
+			res.status(500).json({
+				error: error.message || 'Failed to get all books'
 			});
 		});
 });
@@ -49,7 +49,7 @@ router.get('/:id', (req, res) => {
 		}).catch(error => {
 			console.log(error);
 			res.status(500).json({
-				error: error.message || `failed to get object by id: ${id}`
+				error: error.message || `Failed to get object by id: ${id}`
 			});
 		});
 });
@@ -62,13 +62,13 @@ router.get('/:userId/user', (req, res) => {
 		.then(result => {
 			if (!result)
 				return res.status(404).json({
-					error: `book not found by id: ${id}`
+					error: `Book not found by id: ${id}`
 				});
 			res.status(200).json(result);
 		}).catch(error => {
 			console.log(error);
 			res.status(500).json({
-				error: error.message || `failed to get object by id: ${id}`
+				error: error.message || `Failed to get object by id: ${id}`
 			});
 		});
 });
