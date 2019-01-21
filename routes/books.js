@@ -100,7 +100,7 @@ router.delete('/:id', hasToken, (req, res) => {
 			res.status(200).json(result);
 		}).catch(error => {
 			console.log(error);
-			res.json({
+			res.status(500).json({
 				error: error.message || 'Failed to remove book'
 			});
 		});
