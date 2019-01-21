@@ -12,7 +12,6 @@ const users = require('./routes/users');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-console.log(process.env.DB_URL)
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true });
 
 app.use('/books', books);
